@@ -1,5 +1,5 @@
 {
-  "name": "ta",
+  "name": "fuck",
   "version": "v1.0.0",
   "description": "一个创建、推送Tag自动化脚本",
   "bin": {
@@ -10,10 +10,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": [
-		"cli.js",
-		"index.js",
+    "cli.js",
+    "index.js",
     "getPkgPath.js"
-	],
+  ],
   "keywords": [
     "git",
     "tag"
