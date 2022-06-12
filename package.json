@@ -12,14 +12,16 @@
   "files": [
     "cli.js",
     "index.js",
-    "getPkgPath.js"
+    "getPkgPath.js",
+    "user.js",
+    "handoffUser.js"
   ],
   "keywords": [
     "git",
     "tag"
   ],
   "author": "学习使我快乐",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "commander": "^9.3.0",
     "inquirer": "^8.2.4",
