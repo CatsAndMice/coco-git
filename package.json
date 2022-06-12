@@ -1,7 +1,7 @@
 {
   "name": "ta",
-  "version": "v1.1.0",
-  "description": "",
+  "version": "v1.0.0",
+  "description": "一个创建、推送Tag自动化脚本",
   "bin": {
     "ta": "cli.js"
   },
