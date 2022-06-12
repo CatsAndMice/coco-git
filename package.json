@@ -1,9 +1,9 @@
 {
-  "name": "fuck",
-  "version": "v1.0.0",
+  "name": "coco-git",
+  "version": "1.0.0",
   "description": "一个创建、推送Tag自动化脚本",
   "bin": {
-    "ta": "cli.js"
+    "coco": "cli.js"
   },
   "main": "index.js",
   "scripts": {
