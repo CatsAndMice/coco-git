@@ -1,6 +1,6 @@
 {
   "name": "coco-git",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "一个创建、推送Tag自动化脚本",
   "bin": {
     "coco": "cli.js"
