@@ -37,7 +37,7 @@ module.exports = async () => {
             choices: lists,
             default: [lists[0]]
         }]).then(async ({ list }) => {
-            pkg.version = list
+            pkg.version = list.replace('v','')
             let branch = await $`git branch`;
             const { stdout } = branch;
             const reg = /\*\D(.+)\D/g;
