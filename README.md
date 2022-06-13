@@ -1,5 +1,5 @@
 # coco-git
-它是一个自动创建、推送git tag脚本。
+它是一个创建、推送git tag自动化脚本。
 
 ## 安装
 ```shell
