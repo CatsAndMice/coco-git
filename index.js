@@ -1,11 +1,41 @@
 #!/usr/bin/env zx
 const inquirer = require('inquirer');
-const path = require('path');
 const fs = require('fs');
 const { $ } = require('zx');
 const getPkgPath = require('./getPkgPath');
+const { isFunc } = require('medash');
 
-module.exports = async () => {
+const writePkg = ({ pkgPath, pkg, callBack }) => {
+    fs.writeFile(pkgPath, String(JSON.stringify(pkg, null, 2)), 'utf8', async (error) => {
+        if (error) {
+            return;
+        }
+        isFunc(callBack) ? callBack() : null
+    });
+}
+
+const shell = async ({ list, branch }) => {
+    await $`git add .`;
+    await $`git commit -m ${list}`;
+    await $`git push origin ${branch}`;
+    try {
+        await $`git tag ${list}`;
+        await $`git push origin ${list}`;
+        //发版失败，回退版本
+    } catch (error) {
+        await $`git tag -d ${list}`;
+        await $`git push origin :refs/tags/${list}`;
+    }
+}
+
+const getBranch = async () => {
+    let branch = await $`git branch`;
+    const { stdout } = branch;
+    const reg = /\*\D(.+)\D/g;
+    branch = (reg.exec(stdout))[1];
+}
+
+const createAndPushTag = async ({ isUpdateVersion }) => {
     const pkgPath = await getPkgPath()
     const pkg = require(pkgPath)
     const version = pkg.version;
@@ -13,6 +43,7 @@ module.exports = async () => {
     const execs = reg.exec(version)
     const addOne = (num) => Number(num) + 1;
     const getVersion = ([major, minor, patch]) => `v${major}.${minor}.${patch}`
+    const branch = await getBranch()
     const getVersions = () => {
         const ZERO = 0
         return [
@@ -37,31 +68,16 @@ module.exports = async () => {
             choices: lists,
             default: [lists[0]]
         }]).then(async ({ list }) => {
-            pkg.version = list.replace('v','')
-            let branch = await $`git branch`;
-            const { stdout } = branch;
-            const reg = /\*\D(.+)\D/g;
-            branch = (reg.exec(stdout))[1];
-            fs.writeFile(pkgPath, String(JSON.stringify(pkg, null, 2)), 'utf8', async (error) => {
-                if (error) {
-                    return;
-                }
-
-                await $`git add .`;
-                await $`git commit -m ${list}`;
-                await $`git push origin ${branch}`;
-                try {
-                    await $`git tag ${list}`;
-                    await $`git push origin ${list}`;
-                    //发版失败，回退版本
-                } catch (error) {
-                    await $`git tag -d ${list}`;
-                    await $`git push origin :refs/tags/${list}`;
-                }
-            });
+            pkg.version = list.replace('v', '')
+            writePkg({ pkgPath, pkg, callBack: shell.bind(null, { list, branch }) })
         })
     }
-    onSelectVersion()
+
+    isUpdateVersion ? onSelectVersion() : shell({ list: 'v' + version, branch })
+}
+
+module.exports = {
+    createAndPushTag
 }
 
 

@@ -21,7 +21,8 @@
     "index.js",
     "getPkgPath.js",
     "user.js",
-    "handoffUser.js"
+    "handoffUser.js",
+    "isUpdateVersion.js"
   ],
   "keywords": [
     "git",
