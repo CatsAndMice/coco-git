@@ -17,7 +17,7 @@ const writePkg = ({ pkgPath, pkg, callBack }) => {
 const shell = async ({ list, branch }) => {
     await $`git add .`;
     await $`git commit -m ${list}`;
-    await $`git push origin ${branch}`;
+    await $`git push origin release: ${branch}`;
     try {
         await $`git tag ${list}`;
         await $`git push origin ${list}`;
