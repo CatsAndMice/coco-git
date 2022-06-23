@@ -1,6 +1,6 @@
 {
   "name": "coco-git",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "一个创建、推送Tag自动化脚本",
   "bugs": {
     "url": "https://github.com/CatsAndMice/coco-git/issues"
@@ -14,7 +14,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "release": "npm publish"
+    "release": "node cli.js tag&&npm publish"
   },
   "files": [
     "cli.js",

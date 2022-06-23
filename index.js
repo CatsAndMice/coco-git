@@ -16,7 +16,7 @@ const writePkg = ({ pkgPath, pkg, callBack }) => {
 
 const shell = async ({ list, branch }) => {
     await $`git add .`;
-    await $`git commit -m release: ${list}`;
+    await $`git commit -m release:'${list}'`;
     await $`git push origin ${branch}`;
     try {
         await $`git tag ${list}`;
@@ -33,6 +33,7 @@ const getBranch = async () => {
     const { stdout } = branch;
     const reg = /\*\D(.+)\D/g;
     branch = (reg.exec(stdout))[1];
+    return branch
 }
 
 const createAndPushTag = async ({ isUpdateVersion }) => {
