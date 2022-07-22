@@ -17,12 +17,8 @@
     "release": "node cli.js tag&&npm publish"
   },
   "files": [
-    "cli.js",
-    "index.js",
-    "getPkgPath.js",
-    "user.js",
-    "handoffUser.js",
-    "isUpdateVersion.js"
+    "bin",
+    "src"
   ],
   "keywords": [
     "git",
