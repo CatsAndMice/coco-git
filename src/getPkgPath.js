@@ -2,7 +2,8 @@ const process = require('process')
 const fs = require('fs/promises')
 const path = require('path')
 const { isEmpty } = require('medash')
-const PKG_NAME = 'package.json'
+const {PKG_NAME} = require('./const')
+
 module.exports = async function getPkgPath(cwd = process.cwd()) {
     const readdir = await fs.readdir(cwd)
     if (readdir.includes(PKG_NAME)) {
