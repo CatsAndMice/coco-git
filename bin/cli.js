@@ -4,7 +4,9 @@ const process = require('process')
 const pkg = require('../package.json')
 const handoffUser = require('../src/handoffUser')
 const isUpdateVersion = require('../src/isUpdateVersion')
-const createGitignore = require('../src/createGitignore')
+const createInit = require('../src/createInit')
+const { LICENSE, GITIGNORE } = require('../src/const')
+
 program.version(pkg.version).parse(process.argv);
 program.command('tag')
   .description('自动创建git tag并推送远程')
@@ -16,8 +18,9 @@ program.command('user')
 
 program.command('init')
   .description('创建忽略文件与开源协议文件')
-  .action(()=>{
-    createGitignore()
+  .action(() => {
+    createInit(LICENSE)
+    createInit(GITIGNORE)
   })
 
 program.parse(process.argv)

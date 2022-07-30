@@ -1,5 +1,5 @@
 const getPkgPath = require('./getPkgPath')
-const { PKG_NAME, GITIGNORE } = require('./const')
+const { PKG_NAME } = require('./const')
 const fs = require('fs')
 const path = require('path')
 
@@ -12,12 +12,12 @@ function copyFile(src, dist) {
     fs.writeFileSync(dist, fs.readFileSync(src));
 }
 
-module.exports = async () => {
+module.exports = async (fileName) => {
     let packagePath = await getPkgPath()
     packagePath = packagePath.replace(PKG_NAME, '')
-    const gitignoreFile = packagePath + GITIGNORE
-    const isExists = fs.existsSync(gitignoreFile)
+    const dist = packagePath + fileName
+    const isExists = fs.existsSync(dist)
     if (isExists) return
-    const src = path.join(__dirname, `../src/${GITIGNORE}`)
-    copyFile(src,gitignoreFile)
+    const src = path.join(__dirname, `../${fileName}`)
+    copyFile(dist, src)
 }
