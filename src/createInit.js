@@ -9,15 +9,15 @@ const path = require('path')
  * @param {*} dist 复制的内容
  */
 function copyFile(src, dist) {
-    fs.writeFileSync(dist, fs.readFileSync(src));
+    fs.writeFileSync(src, fs.readFileSync(dist));
 }
 
 module.exports = async (fileName) => {
     let packagePath = await getPkgPath()
     packagePath = packagePath.replace(PKG_NAME, '')
-    const dist = packagePath + fileName
-    const isExists = fs.existsSync(dist)
+    const src = packagePath + fileName
+    const isExists = fs.existsSync(src)
     if (isExists) return
-    const src = path.join(__dirname, `../${fileName}`)
-    copyFile(dist, src)
+    const dist = path.join(__dirname, `../${fileName}`)
+    copyFile(src, dist)
 }
