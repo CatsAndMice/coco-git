@@ -1,7 +1,6 @@
 const getPkgPath = require('./getPkgPath')
 const { PKG_NAME } = require('./const')
 const fs = require('fs')
-const path = require('path')
 
 /**
  * 复制文件

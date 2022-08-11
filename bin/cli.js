@@ -21,7 +21,7 @@ program.command('init')
   .description('创建忽略文件与开源协议文件')
   .action(() => {
     const licenseDist = path.join(__dirname, `../${LICENSE}`)
-    const gitignoreDist = path.join(__dirname, `../src/${GITIGNORE}`)
+    const gitignoreDist = path.join(__dirname, `../src/${GITIGNORE + 'Template'}.md`)
     createInit(LICENSE, licenseDist)
     createInit(GITIGNORE, gitignoreDist)
   })
