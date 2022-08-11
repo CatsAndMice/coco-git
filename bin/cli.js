@@ -6,6 +6,7 @@ const handoffUser = require('../src/handoffUser')
 const isUpdateVersion = require('../src/isUpdateVersion')
 const createInit = require('../src/createInit')
 const { LICENSE, GITIGNORE } = require('../src/const')
+const path = require('path')
 
 program.version(pkg.version).parse(process.argv);
 program.command('tag')
@@ -19,8 +20,10 @@ program.command('user')
 program.command('init')
   .description('创建忽略文件与开源协议文件')
   .action(() => {
-    createInit(LICENSE)
-    createInit(GITIGNORE)
+    const licenseDist = path.join(__dirname, `../${LICENSE}`)
+    const gitignoreDist = path.join(__dirname, `../src/${GITIGNORE}`)
+    createInit(LICENSE, licenseDist)
+    createInit(GITIGNORE, gitignoreDist)
   })
 
 program.parse(process.argv)

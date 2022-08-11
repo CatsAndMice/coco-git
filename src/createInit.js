@@ -12,12 +12,11 @@ function copyFile(src, dist) {
     fs.writeFileSync(src, fs.readFileSync(dist));
 }
 
-module.exports = async (fileName) => {
+module.exports = async (fileName,dist) => {
     let packagePath = await getPkgPath()
     packagePath = packagePath.replace(PKG_NAME, '')
     const src = packagePath + fileName
     const isExists = fs.existsSync(src)
     if (isExists) return
-    const dist = path.join(__dirname, `../${fileName}`)
     copyFile(src, dist)
 }
